@@ -8,7 +8,7 @@ db = SQLAlchemy()
 migrate = Migrate()
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__, template_folder='templates')
     app.config.from_object(config)
 
     #ORM
@@ -17,7 +17,9 @@ def create_app():
     from . import models
 
     #블루프린터 등록
-    from.views import main_views
+    from.views import main_views ,question_views,answer_views
     app.register_blueprint(main_views.bp)
+    app.register_blueprint(question_views.bp)
+    app.register_blueprint(answer_views.bp)
 
     return app
